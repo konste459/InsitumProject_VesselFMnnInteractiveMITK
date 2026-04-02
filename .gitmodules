@@ -1,4 +1,4 @@
 [submodule "VesselFM/external/vesselFM"]
 	path = VesselFM/external/vesselFM
-	url = https://github.com/mohitulm/InsitumProject_VesselFMnnInteractiveMITK.git
+	url = https://github.com/bwittmann/vesselFM.git
 	branch = main
