@@ -3,8 +3,7 @@
 Integration of **VesselFM** into **MITK Workbench** as a native plugin and segmentation tool.
 
 This project enables running deep-learning-based vessel segmentation directly inside MITK, including:
-- a **Workbench view plugin** for standalone inference
-- a **Segmentation Tool (Preview Tool)** for interactive workflows
+- a **Segmentation Tool (Preview Tool)** for VesselFM inference and interactive workflows
 
 ---
 
@@ -28,14 +27,15 @@ This project enables running deep-learning-based vessel segmentation directly in
 # 📁 Repository Structure
 
 
-Plugins/org.mitk.gui.qt.vesselfm/
-    QmitkVesselFMView.cpp
-    VesselFMRunner.cpp
-    mitkVesselFMActivator.cpp
-
 Modules/VesselFM/
-    Interactions/mitkVesselFMSegTool3D.cpp -> main lgic file
+    Interactions/mitkVesselFMSegTool3D.cpp -> main logic file
+    external/vesselFM -> added as a git submodule, it is the official repo for VesselFM. 
+    (Before building, add __init__.py files to the vesselFM folder and subfolders so that it could be installed as a package correctly.)
+    
+Modules/VesselFMUI/
+    Qmitk/QmitkVesselFMSegTool3DGUI.cpp -> main l0gic file
     (optional GUI files)
+
 # ⚙️ Requirements
   - System: Windows 10/11
   - Visual Studio 2022 (MSVC)
@@ -48,7 +48,7 @@ Modules/VesselFM/
  - torch
  - hydra-core
  - monai
- - VesselFM dependencies
+ - VesselFM dependencies such as torch might be system and driver dependent 
 
 1. MITK Superbuild
 
@@ -63,7 +63,6 @@ C:\MITK_build\MITK-build\       <- build directory
    -> run this command for this: cmake --build C:\MITK_build\MITK-build --config Release --target MitkWorkbench
 
 3. If you make changes to the plugin rebuild only the change files i.e. with these commands
-   - make --build C:\MITK_build\MITK-build --config Release --target org_mitk_gui_qt_vesselfm
    - cmake --build C:\MITK_build\MITK-build --config Release --target MitkVesselFM
    - cmake --build C:\MITK_build\MITK-build --config Release --target MitkVesselFMUI
 
